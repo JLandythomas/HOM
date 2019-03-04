@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home of Mortgages - Mortgage Calculator</title>
+
+    <!--Template based on URL below-->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Place your stylesheet here-->
+    <link href="/css/calculator/stylesheet.css" rel="stylesheet" type="text/css">
+    <link href="/css/calculator/custom.css" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+
+<body>
+
+    <main role="main" class="container">
+
+        <div class="container">
+            <div class="row pt-4 pb-2">
+                <div class="col-12 main">
+                    <img src="images/logo_w.jpg" class="img-fluid mx-auto d-block">
+                    <h1 class="mt-3 pb-3" style="border-bottom: 1px solid #d7d7d7;">Mortgage Calculator</h1>
+                    <form id="form" class="calculate">
+                        <div class="form-row pb-2 mt-2">
+                            <div class="col-12 mb-4">
+                                <label for="purchasePrice">Purchase Price:</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">&pound;</span>
+                                    <input type="text" class="form-control" placeholder="£280,000" value="" name="purchasePrice">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label for="depositAmount">Deposit amount:</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">&pound;</span>
+                                    <input type="text" class="form-control" placeholder="£5000" value="" name="depositAmount">
+                                </div>
+
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label for="mortgageTerm">Mortgage Term:</label>
+                                <select class="form-control" name="term">
+                                    <option value="10">10 years</option>
+                                    <option value="11">11 years</option>
+                                    <option value="12">12 years</option>
+                                    <option value="13">13 years</option>
+                                    <option value="14">14 years</option>
+                                    <option value="15">15 years</option>
+                                    <option value="16">16 years</option>
+                                    <option value="17">17 years</option>
+                                    <option value="18">18 years</option>
+                                    <option value="19">19 years</option>
+                                    <option value="20">20 years</option>
+                                    <option value="21">21 years</option>
+                                    <option value="22">21 years</option>
+                                    <option value="23">23 years</option>
+                                    <option value="24">24 years</option>
+                                    <option value="25">25 years</option>
+                                    <option value="26">26 years</option>
+                                    <option value="27">27 years</option>
+                                    <option value="28">28 years</option>
+                                    <option value="29">29 years</option>
+                                    <option value="30">30 years</option>
+                                </select>
+
+
+                                <p class="mt-5">Based on the average fee of 3%</p>
+
+
+
+
+                                <button type="button" class="btn btn-success btn-lg btn-block calculate" data-toggle="collapse" data-target="#results">Calculate</button>
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div id="results" class="collapse text-center">
+                <p>You require a mortgage of: <br /><span>&pound;80,000</span></p>
+                <p>Your monthly payments could be:<br />From:<br /> <span>&pound;768.00</span> per month<br /> To: <br /><span>&pound;787.00</span> per month</p>
+                <p>With a loan to value of:<br /><span class="precentage">28.57%</span></p>
+                <p class="reset"><u><a href="">Reset Calculator</a></u></p>
+                <p class="u">See deals you qualify for...</p>
+                <button type="button" class="btn btn-success btn-lg btn-block"><a href="https://www.homeofmortgages.co.uk" target="_blank">Go ></a></button>
+            </div>
+        </div>
+
+    </main><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".calculate").click(function() {
+                calculate();
+                $("#form").hide();
+                authenticate();
+            });
+            $(".reset").click(function() {
+                $("#form").show();
+            });
+        });
+        
+        var token;
+        var endPoint="//api.property.jacklogic.com/api";
+        var email="ben@jacklogic.com";
+        var password="test1234";
+        var loanId="1";
+        
+        $(document).ready(function() {
+            $(".applicant1").on("change paste keyup", function() {
+                calculate();
+                $(".summary").fadeIn(400);
+            });
+            $(".applicant2").on("change paste keyup", function() {
+                calculate();
+                 $(".summary").fadeIn(400);
+            });
+            
+        });
+
+        function calculate() {
+            var jsonData = {};
+            jsonData["assetValue"] = $(".purchasePrice").val();
+            jsonData["depositAmount"] = $(".depositAmount").val();
+            jsonData["term"] = $(".term").val()*12;
+            ajaxCallRequest("post", endPoint+"/loan/"+loanId+"/calculate", jsonData, {"Authorization": 'Bearer ' +token }, 'setBorrowing');
+        }
+
+        function authenticate() {
+            var form = $('.calculate');
+            var jsonData = {};
+                jsonData["email"] = email;
+                jsonData["password"] = password;
+            ajaxCallRequest("post", endPoint+"/login", jsonData, '', 'setToken');
+        }
+
+        
+        function setToken(data)
+        {
+            token = data.token;
+        }
+        
+        function setBorrowing(data)
+        {
+            $(".borrow-amount").text(data.borrowTotal.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        }
+
+
+        function ajaxCallRequest(f_method, f_url, f_data, f_headers, callbackMethod) {
+            var f_contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+            $.ajax({
+                url: f_url,
+                type: f_method,
+                contentType: f_contentType,
+                dataType: 'json',
+                data: f_data,
+                headers: f_headers,
+                success: function(data) {
+                window[callbackMethod](data);
+                }
+            });
+        }
+        
+        
+    </script>
+
+</body>
+
+</html>

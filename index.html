@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home of Mortgages - How much can I borrow?</title>
+
+    <!--Template based on URL below-->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Place your stylesheet here-->
+    <link href="/css/stylesheet.css" rel="stylesheet" type="text/css">
+    <link href="/css/custom.css" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+
+<body>
+
+    <main role="main" class="container">
+
+        <div class="container">
+            <div class="row pt-4 pb-4">
+                <div class="col-lg-8 pr-5 main">
+                    <img src="images/Home%20of%20Mortgages_HOM_Full%20Page.jpg" class="img-fluid mb-3 d-block d-lg-none mx-auto">
+                    <h1>How much can I borrow on a mortgage?</h1>
+                    <p class="d-none d-lg-block">Lorem ipsum dolor sit amet, in his volutpat efficiantur. No vis habeo iriure scaevola, vel ei dolore recusabo, at vim brute zril dissentiunt. Posidonium referrentur his at, quo zril corpora perfecto ex, vide senserit vel cu. Te ludus mollis scripserit eam, movet altera sea ne, amet nemore mea ex. Ut vis soluta insolens.</p>
+                    <form class="borrow-form">
+                        <div class="form-row pb-5 mt-5">
+                            <div class="col-md-6">
+                                <label for="applicantOne">Applicant 1's income</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">&pound;</span>
+                                    <input type="text" class="form-control applicant1" placeholder="£50,000" value="" name="income[]">
+                                </div>
+                                <small id="emailHelp" class="form-text text-muted">Enter your annual income above.</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="applicantTwo">Applicant 2's income</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">&pound;</span>
+                                    <input type="text" class="form-control applicant2" placeholder="£0" value="" name="income[]">
+                                </div>
+                                <small id="emailHelp" class="form-text text-muted">Add your partner's annual income above if relevant.</small>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="container pt-4 summary pl-0">
+                        <div class="row mt-4">
+                            <div class="col-sm">
+                                <h4>Mortgage Summary?</h4>
+                                <p>The maximum you could borrow is</p>
+                                <h5>&pound;<span class="borrow-amount">237,500</span>*</h5>
+                                <p class="small" style="font-size: 0.7em; line-height: 1em;">* This does not factor in your individual circumstances, expenditure, property details or a check against your credit file</p>
+                            </div>
+                            <div class="col-sm text-center">
+                                <img src="images/home_icon.jpg" class="d-none d-md-block mx-auto">
+                                <p>See the deals you qualify for...</p>
+                                <button type="button" class="btn btn-lg go">Go ></button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 text-center pl-5 d-none d-lg-block sidebar">
+                    <img src="images/Home%20of%20Mortgages_HOM_Full%20Page.jpg" class="img-fluid mb-3">
+                    <p>We are the one-stop shop for Mortgages, including Mortgages that are not readily available on the High Street.</p>
+                    <p>We use our experience to tailor a mortgage to your exact needs, carefully selected from more than 10,000 mortgage products on the market.</p>
+
+                    <div class="card text-center mt-5">
+                        <div class="card-body text-white">
+                            <h5 class="card-title">Call our expert <br /> advisers now</h5>
+                            <p class="card-text">020 8517 1141 <br /><span style="font-size: 0.6em;">or</span></p>
+                            <a href="https://www.homeofmortgages.co.uk/" target="_blank" class="btn btn-lg continue">Continue Online</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </main><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/jquery-form.serializer.js"></script>
+
+    <script>
+        
+        var token;
+        var endPoint="//api.property.jacklogic.com/api";
+        var email="ben@jacklogic.com";
+        var password="test1234";
+        var loanId="1";
+        
+        $(document).ready(function() {
+            $(".applicant1").on("change paste keyup", function() {
+                calculate();
+                $(".summary").fadeIn(400);
+            });
+            $(".applicant2").on("change paste keyup", function() {
+                calculate();
+                 $(".summary").fadeIn(400);
+            });
+            authenticate();
+        });
+
+        function calculate() {
+            var jsonData = {};
+            jsonData["income"] = [];
+                $('input[name="income[]"]').each(function (){
+                    jsonData["income"].push(this.value);
+                });
+            ajaxCallRequest("get", endPoint+"/loan/"+loanId+"/borrow", jsonData, {"Authorization": 'Bearer ' +token }, 'setBorrowing');
+        }
+
+        function authenticate() {
+            var form = $('.borrow-form');
+            var jsonData = {};
+                jsonData["email"] = email;
+                jsonData["password"] = password;
+            ajaxCallRequest("post", endPoint+"/login", jsonData, '', 'setToken');
+        }
+
+        
+        function setToken(data)
+        {
+            token = data.token;
+        }
+        
+        function setBorrowing(data)
+        {
+            $(".borrow-amount").text(data.borrowTotal.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        }
+
+
+        function ajaxCallRequest(f_method, f_url, f_data, f_headers, callbackMethod) {
+            var f_contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+            $.ajax({
+                url: f_url,
+                type: f_method,
+                contentType: f_contentType,
+                dataType: 'json',
+                data: f_data,
+                headers: f_headers,
+                success: function(data) {
+                    window[callbackMethod](data);
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

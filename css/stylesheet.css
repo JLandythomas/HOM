@@ -1,0 +1,82 @@
+body h1, h4, h5 p
+{
+    font-family: 'Raleway', sans-serif;
+}
+
+.main h1
+{
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.container
+{
+    background-color: #eeeeee;
+}
+
+.container .row .sidebar
+{
+    border-left: 1px solid #0088ff;
+  
+}
+
+.sidebar p
+{
+    line-height: 1.3em;
+}
+
+.summary
+{
+    border-top: 1px solid #d7d7d7;
+}
+
+.summary h4
+{
+    color: #007ff3;
+    font-size: 1.6em;
+}
+
+.summary h5
+{
+    color: #000000;
+    font-size: 3em;
+    font-weight: normal;
+}
+
+.sidebar p.card-text 
+{
+    font-size: 1.8em;
+}
+
+.main .form-control
+{
+    height: 3em;
+}
+
+
+.main .input-group-prepend span.input-group-text
+{
+    background-color: #0085fe;
+    color: #ffffff;
+}
+
+.sidebar .card, .main .go
+{
+    background-color: #94c11e;
+    color: #ffffff;
+}
+
+.sidebar .continue
+{  
+    color: #ffffff;
+    background-color: #5a6c80;
+}
+
+.summary {
+    display: none;
+}
+        
+    
+
+
