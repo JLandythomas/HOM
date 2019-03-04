@@ -28,38 +28,36 @@
                     <img src="images/logo_w.jpg" class="img-fluid mx-auto d-block">
                     <h1 class="mt-3 pb-3 text-responsive" style="border-bottom: 1px solid #d7d7d7;">Rental Yield Calculator</h1>
                     <p class="d-none d-lg-block">Calculating your rental yield will help you see if your property is a good investment, and you might need it if you’re considering a buy to let mortgage.</p>
-                    <form id="form">
+                    <form id="form" class="rent-calculate">
                         <div class="form-row pb-2 mt-2">
                             <div class="col-12 mb-4">
                                 <label for="propertyValue">Property Value:</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">&pound;</span>
-                                    <input type="text" class="form-control" placeholder="£280,000">
+                                    <input type="text" class="form-control property-value" placeholder="£280,000" name="propertyValue">
                                 </div>
                             </div>
                             <div class="col-12 mb-4">
                                 <label for="monthlyRentalIncome">Monthly rental income:</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">&pound;</span>
-                                    <input type="text" class="form-control" placeholder="£5000">
+                                    <input type="text" class="form-control rental-income" placeholder="£5000" name="rentalIncome">
                                 </div>
-
+                                <input type="hidden" id="rentFrequency" name="rentFrequency" value="month">
                             </div>
-                            
+
                             <div class="col-sm text-center results collapse" id="results">
                                 <p>Your Rental yield is:<br />
-                                <span style="font-size: 3em;">5.17%</span></p>
+                                    <span style="font-size: 3em;" class="rental-yield">5.17</span><span>%</span>
                                 <p class="reset"><u><a href="">Reset Calculator</a></u></p>
                                 <p>See buy to let Mortgages available...</p>
-                        <button type="button" class="btn btn-lg go mb-3"><a href="" >Go ></a></button>
-                    </div>
-                            
-                            <button type="button" class="btn btn-success btn-lg btn-block calculate mb-4">Calculate</button>
-                            
+                                <button type="button" class="btn btn-lg go mb-3"><a href="">Go ></a></button>
+                            </div>
+
                         </div>
                     </form>
-                    
-                    
+
+
                 </div>
 
             </div>
@@ -72,25 +70,75 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
+
         $(document).ready(function() {
-            $(".reset").click(function() {
-                $("#results").hide();
+            $(".property-value").on("change paste keyup", function() {
+                calculate();
+                $(".results").fadeIn(400);
             });
-            $(".calculate").click(function() {
-                $("#results").show();
-                $(".calculate").hide();
+            $(".rental-income").on("change paste keyup", function() {
+                calculate();
+                 $(".results").fadeIn(400);
             });
+            authenticate();
         });
-        
-        
+
+
+        var token;
+        var endPoint = "//api.property.jacklogic.com/api";
+        var email = "ben@jacklogic.com";
+        var password = "test1234";
+
+
+        function calculate() {
+            var jsonData = {};
+            jsonData["propertyValue"] = $("input[name='propertyValue']").val();
+            jsonData["rentValue"] = $("input[name='rentalIncome']").val();
+            jsonData["rentFrequency"] = $("input[name='rentFrequency']").val();
+            ajaxCallRequest("get", endPoint + "/rent/yield", jsonData, {
+                "Authorization": 'Bearer ' + token
+            }, 'rentalCalculator');
+        }
+
+        function authenticate() {
+            var form = $('.rent-calculate');
+            var jsonData = {};
+            jsonData["email"] = email;
+            jsonData["password"] = password;
+            ajaxCallRequest("post", endPoint + "/login", jsonData, '', 'setToken');
+        }
+
+
+        function setToken(data) {
+            token = data.token;
+        }
+
+        function rentalCalculator(data) {
+            console.log(data);
+            $(".rental-yield").text(data.yield.toFixed(2));
+
+        }
+
+
+        function ajaxCallRequest(f_method, f_url, f_data, f_headers, callbackMethod) {
+            var f_contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+            $.ajax({
+                url: f_url,
+                type: f_method,
+                contentType: f_contentType,
+                dataType: 'json',
+                data: f_data,
+                headers: f_headers,
+                success: function(data) {
+                    window[callbackMethod](data);
+                }
+            });
+        }
     </script>
-    
-    
 
 </body>
 
