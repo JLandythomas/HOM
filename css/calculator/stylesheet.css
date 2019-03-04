@@ -12,7 +12,7 @@ body h1, h4, h5 p
 
 .main .form-control
 {
-    height: 3.5em;
+    height: 3em;
 }
 
 
@@ -20,6 +20,12 @@ body h1, h4, h5 p
 {
     background-color: #0085fe;
     color: #ffffff;
+    font-size: 1.5em;
+}
+
+input.form-control, select.form-control {
+
+    font-size: 1.2em;
 }
 
 .main .btn, #results .btn
@@ -55,6 +61,10 @@ body h1, h4, h5 p
 {
     color: #2e99f7;
 
+}
+
+.greaterthanzero-warning, .deposit-amount-warning{
+    display: none;
 }
 
 
