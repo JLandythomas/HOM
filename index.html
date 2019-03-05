@@ -146,7 +146,7 @@
         
         function setBorrowing(data)
         {
-            $(".borrow-amount").text(data.borrowTotal.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            $(".borrow-amount").text(data.borrowTotal.toLocaleString("en"));
         }
 
 

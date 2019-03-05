@@ -129,8 +129,8 @@
 
         function rentalCalculator(data) {
             console.log(data);
-            $(".loan-amount1").text(data.loanAmount[0].toLocaleString("en"));
-            $(".loan-amount2").text(data.loanAmount[1].toLocaleString("en"));
+            $(".loan-amount1").text( parseInt(data.loanAmount[0]).toLocaleString("en"));
+            $(".loan-amount2").text( parseInt(data.loanAmount[1]).toLocaleString("en"));
 
         }
 

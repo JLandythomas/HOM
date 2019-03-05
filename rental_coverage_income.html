@@ -129,8 +129,8 @@
 
         function rentalCalculator(data) {
             console.log(data);
-            $(".rental-income1").text(data.rentalIncome[0].toFixed(2));
-            $(".rental-income2").text(data.rentalIncome[1].toFixed(2));
+            $(".rental-income1").text( parseInt(data.rentalIncome[0]).toLocaleString("en"));
+            $(".rental-income2").text( parseInt(data.rentalIncome[1]).toLocaleString("en"));
 
         }
 

@@ -112,6 +112,7 @@
                 <p>You require a mortgage of: <br /><span>&pound;</span><span class="loan-amount">80,000</span></p>
                 <p>Your monthly payments could be:<br /><span class="one-result">From:</span><br /> <span>&pound;</span><span class="monthly-payment1">787.00</span> per month<br /> <span class="one-result">To: <br /><span class="monthly-payment2">&pound;787.00</span> per month</span></p>
                 <p>With a loan to value of:<br /><span class="precentage loan-to-value">28.57</span>%</p>
+                <p>Based on interest rate of <span class="interest-rate" style="font-size: 1em;"></span>%</p>
                 <p class="reset"><u><a href="">Reset Calculator</a></u></p>
                 <p class="u">See deals you qualify for...</p>
                 <button type="button" class="btn btn-success btn-lg btn-block"><a href="https://www.homeofmortgages.co.uk" target="_blank">Go ></a></button>
@@ -214,6 +215,7 @@
             console.log(data);
             var loan= data[0];
             $(".mortgage-required").text(loan.min_loan_amount);
+            $(".interest-rate").text(loan.interest_rate);
             $(".loan-to-value").text(loan.loan_to_value_ratio);
             $(".loan-amount").text(loan.loanAmount);
             $(".monthly-payment1").text(loan.monthlyPayment);
