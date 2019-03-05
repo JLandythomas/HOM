@@ -46,7 +46,7 @@
                                 <label for="depositAmount">Deposit amount:</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">&pound;</span>
-                                    <input type="text" class="form-control deposit-amount" placeholder="£5000" value="30000" name="depositAmount">
+                                    <input type="text" class="form-control deposit-amount" placeholder="£5000" value="70000" name="depositAmount">
                                 </div>
                                 <small id="" class="text-muted">
                                     <span class="deposit-amount-warning text-warning">Deposit amount must be less than Purchase Price</span>
@@ -87,6 +87,10 @@
                                 <button type="button" class="btn btn-success btn-lg btn-block calculate-button mt-5" data-toggle="collapse" data-target="#results">Calculate</button>
 
                             </div>
+
+                                <input type="hidden" id="productType" name="productType" value="fixed">
+                                <input type="hidden" id="earlyRepaymentPeriod" name="earlyRepaymentPeriod" value="36">
+
                         </div>
                     </form>
 
@@ -95,9 +99,9 @@
             </div>
 
             <div id="results" class="collapse text-center">
-                <p>You require a mortgage of: <br /><span class="loan-amount">&pound;80,000</span></p>
-                <p>Your monthly payments could be:<br />From:<br /> <span class="monthly-payment1">&pound;768.00</span> per month<br /> To: <br /><span class="monthly-payment2">&pound;787.00</span> per month</p>
-                <p>With a loan to value of:<br /><span class="precentage loan-to-value">28.57%</span></p>
+                <p>You require a mortgage of: <br /><span>&pound;</span><span class="loan-amount">80,000</span></p>
+                <p>Your monthly payments could be:<br /><span class="one-result">From:</span><br /> <span>&pound;</span><span class="monthly-payment1">787.00</span> per month<br /> <span class="one-result">To: <br /><span class="monthly-payment2">&pound;787.00</span> per month</span></p>
+                <p>With a loan to value of:<br /><span class="precentage loan-to-value">28.57</span>%</p>
                 <p class="reset"><u><a href="">Reset Calculator</a></u></p>
                 <p class="u">See deals you qualify for...</p>
                 <button type="button" class="btn btn-success btn-lg btn-block"><a href="https://www.homeofmortgages.co.uk" target="_blank">Go ></a></button>
@@ -125,8 +129,6 @@
             $(".calculate-button").click(function() {
                 calculate();
                 $("#form").hide();
-
-
             });
             $(".reset").click(function() {
                 $("#form").show();
@@ -176,8 +178,10 @@
             var jsonData = {};
             jsonData["assetValue"] = $("input[name='purchasePrice']").val();
             jsonData["depositAmount"] = $("input[name='depositAmount']").val();
+            jsonData["productType"] = $("input[name='productType']").val();
+            jsonData["earlyRepaymentPeriod"] = $("input[name='earlyRepaymentPeriod']").val();
             jsonData["term"] = parseInt($("select[name='term']").find(":selected").text()) * 12;
-            console.log(parseInt($("select[name='term']").find(":selected").text()));
+            //console.log(parseInt($("select[name='term']").find(":selected").text()));
             ajaxCallRequest("get", endPoint + "/loan/find", jsonData, {
                 "Authorization": 'Bearer ' + token
             }, 'mortgageCalculator');
@@ -200,16 +204,14 @@
             console.log(data);
             var loan= data[0];
             $(".mortgage-required").text(loan.min_loan_amount);
-
             $(".loan-to-value").text(loan.loan_to_value_ratio);
             $(".loan-amount").text(loan.loanAmount);
             $(".monthly-payment1").text(loan.monthlyPayment);
             loan=data.slice(-1)[0];
             $(".monthly-payment2").text(loan.monthlyPayment);
-
-            if ($(".monthly-payment1") == $(".monthly-payment2"))
+                if ( $(".monthly-payment1").text() == $(".monthly-payment2").text() )
             {
-                alert("same");
+                $(".one-result").hide();
 
             }
 

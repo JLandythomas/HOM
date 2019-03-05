@@ -52,6 +52,12 @@ input.form-control, select.form-control {
     color: #000000;
 }
 
+#results p span.one-result
+{
+    font-size: 1em;
+    color: #000000;
+}
+
 #results p span.precentage
 {
     font-size: 1.5em;

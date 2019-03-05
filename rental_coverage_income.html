@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home of Mortgages - Rental Coverage Income Calculator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Place your stylesheet here-->
+    <link href="/css/rental_yield/stylesheet.css" rel="stylesheet" type="text/css">
+    <link href="/css/rental_yield/custom.css" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+
+<body>
+
+    <main role="main" class="container">
+
+        <div class="container">
+            <div class="row pt-4 pb-2">
+                <div class="col-12 main">
+                    <img src="images/logo_w.jpg" class="img-fluid mx-auto d-block">
+                    <h1 class="mt-3 pb-3 text-responsive" style="border-bottom: 1px solid #d7d7d7;">Rental Coverage Income Calculator</h1>
+                    <form id="form" class="rent-calculate">
+                        <div class="form-row pb-2 mt-2">
+                            <div class="col-12 mb-4">
+                                <label for="loanAmount">Lending Amount:</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">&pound;</span>
+                                    <input type="text" class="form-control loan-amount" placeholder="£135,000" name="loanAmount" value="135000">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label for="interestRate">Stress Test Rate:</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">&pound;</span>
+                                    <input type="text" class="form-control interest-rate" placeholder="0.055" name="interestRate" value="0.055">
+                                </div>
+                                <input type="hidden" id="rentFrequency" name="rentFrequency" value="month">
+                            </div>
+
+                            <input type="hidden" class="rent-coverage1" placeholder="" value="1.25" name="rentCoverage[]">
+                            <input type="hidden" class="rent-coverage2" placeholder="" value="1.45" name="rentCoverage[]">
+
+                            <div class="col-sm text-center results collapse" id="results">
+                                <p>Rental Coverage: <span class="rentcoverage1" style="font-size: 1em;"></span>%<br />  Rental Income required: <span>&pound;</span><span class="rental-income1">773.43</span></p>
+                                <p class="mt-5">Rental Coverage: <span class="rentcoverage2" style="font-size: 1em;"></span>%  <br />Rental Income required: <span>&pound;</span><span class="rental-income2">897.19</span></p>
+
+                                <p class="reset"><u><a href="">Reset Calculator</a></u></p>
+                                <p>See buy to let Mortgages available...</p>
+                                <button type="button" class="btn btn-lg go mb-3"><a href="">Go ></a></button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            $(".loan-amount").on("change paste keyup", function() {
+                calculate();
+                $(".rentcoverage1").text($(".rent-coverage1").val());
+                $(".rentcoverage2").text($(".rent-coverage2").val());
+                $(".results").fadeIn(400);
+            });
+            $(".interest-rate").on("change paste keyup", function() {
+                calculate();
+                 $(".results").fadeIn(400);
+            });
+            authenticate();
+        });
+
+
+        var token;
+        var endPoint = "//api.property.jacklogic.com/api";
+        var email = "ben@jacklogic.com";
+        var password = "test1234";
+
+
+        function calculate() {
+            var jsonData = {};
+            jsonData["loanAmount"] = $("input[name='loanAmount']").val();
+            jsonData["interestRate"] = $("input[name='interestRate']").val();
+            jsonData["rentFrequency"] = $("input[name='rentFrequency']").val();
+            //jsonData["rentCoverage"] = $("input[name='rentCoverage']").val();
+            jsonData["rentCoverage"] = [];
+                $('input[name="rentCoverage[]"]').each(function (){
+                    jsonData["rentCoverage"].push(this.value);
+                });
+            ajaxCallRequest("get", endPoint + "/rent/coverage/income", jsonData, {
+                "Authorization": 'Bearer ' + token
+            }, 'rentalCalculator');
+        }
+
+        function authenticate() {
+            var form = $('.rent-calculate');
+            var jsonData = {};
+            jsonData["email"] = email;
+            jsonData["password"] = password;
+            ajaxCallRequest("post", endPoint + "/login", jsonData, '', 'setToken');
+        }
+
+
+        function setToken(data) {
+            token = data.token;
+        }
+
+        function rentalCalculator(data) {
+            console.log(data);
+            $(".rental-income1").text(data.rentalIncome[0].toFixed(2));
+            $(".rental-income2").text(data.rentalIncome[1].toFixed(2));
+
+        }
+
+
+        function ajaxCallRequest(f_method, f_url, f_data, f_headers, callbackMethod) {
+            var f_contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+            $.ajax({
+                url: f_url,
+                type: f_method,
+                contentType: f_contentType,
+                dataType: 'json',
+                data: f_data,
+                headers: f_headers,
+                success: function(data) {
+                    window[callbackMethod](data);
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
