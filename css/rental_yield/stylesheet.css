@@ -1,13 +1,31 @@
-body, h1, h4, h5, p
+body, h1, h4, h5, label
 {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Lato', sans-serif;
+}
+
+p
+{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+
+}
+
+span.bold
+{
+    font-weight: bold;
+}
+
+input.form-control{
+
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
 }
 
 .main h1
 {
     font-size: 1.6em;
     margin-bottom: 20px;
-    font-weight: bold;
+    //font-weight: bold;
 }
 
 .main .form-control
