@@ -1,0 +1,88 @@
+body, h1, h4, h5, label
+{
+    font-family: 'Lato', sans-serif;
+}
+
+p
+{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+
+}
+
+span.bold{
+    font-weight: 700;
+}
+
+.main h1
+{
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.main .form-control
+{
+    height: 3em;
+}
+
+
+.main .input-group-prepend span.input-group-text
+{
+    background-color: #0085fe;
+    color: #ffffff;
+    font-size: 1.5em;
+}
+
+input.form-control, select.form-control {
+
+    font-size: 1.2em;
+}
+
+.main .btn, #results .btn
+{
+    background-color: #94c11e;
+    color: #ffffff;
+}
+
+#results .btn a
+{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#results p
+{
+    font-size: 1em;
+    color: #6c6c6c;
+}
+
+#results p span
+{
+    font-size: 2.3em;
+    color: #000000;
+}
+
+#results p span.one-result
+{
+    font-size: 1em;
+    color: #000000;
+}
+
+#results p span.precentage
+{
+    font-size: 1.5em;
+}
+
+#results a
+{
+    color: #2e99f7;
+
+}
+
+.greaterthanzero-warning, .deposit-amount-warning{
+    display: none;
+}
+
+
+

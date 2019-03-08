@@ -83,7 +83,15 @@ p
 .summary {
     display: none;
 }
+
+div #logo
+{
+    background: url("/images/Home%20of%20Mortgages_HOM_Full%20Page.jpg") no-repeat center;
+    min-height: 110px;
+    background-size: contain;
+
+}
         
-    
+
 
 
