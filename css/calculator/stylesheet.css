@@ -37,6 +37,8 @@ span.bold{
 input.form-control, select.form-control {
 
     font-size: 1.2em;
+    /* to resolve firefox input width issue  */
+    min-width:0;
 }
 
 .main .btn, #results .btn
@@ -83,6 +85,8 @@ input.form-control, select.form-control {
 .greaterthanzero-warning, .deposit-amount-warning{
     display: none;
 }
+
+
 
 
 
